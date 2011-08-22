@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: MonsterDebugger.trace()
+# key: tra
+# --
+MonsterDebugger.trace(this, $1, "mico", $0, 0x339966);
