@@ -45,11 +45,26 @@
 
 ;; as3-mode bindings
 (global-set-key (kbd "C-c i") 'as3-indent-line)
+(global-set-key (kbd "C-c C-d") 'as3-describe-class-by-name)
 
 ;; yasnippets
 (require 'yasnippet)
 (setq yas/root-directory "d:/emacs/snippets")
 ; Load the snippets
 (yas/load-directory yas/root-directory)
+
+(setenv "PATH"
+  (concat
+   ;; Change this with your path to MSYS bin directory
+   "D:\\distr\\msysgit\\msysgit\\bin;"
+   (getenv "PATH")))
+
+;; show file name in window title
+(setq frame-title-format
+      (list (format "%s %%S: %%j " (system-name))
+        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+
+;; Prevent annoying bell
+(setq visible-bell t)
 
 (cd "d:/work/ePCN_2/flex/com/nxp/pcn/modules/avl/view/")
