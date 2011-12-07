@@ -53,6 +53,15 @@
 ; Load the snippets
 (yas/load-directory yas/root-directory)
 
+;; git
+(add-to-list 'load-path "d:/emacs/git-emacs")
+(require 'git-emacs)
+
+;; flex compilation
+(require 'flex-ant)
+
+;; MISC
+;; rgrep from msys
 (setenv "PATH"
   (concat
    ;; Change this with your path to MSYS bin directory
@@ -66,5 +75,13 @@
 
 ;; Prevent annoying bell
 (setq visible-bell t)
+
+;; F5 refreshes file
+(defun refresh-file ()
+  (interactive)
+  (revert-buffer t t t)
+  )
+
+(global-set-key [f5] 'refresh-file)
 
 (cd "d:/work/ePCN_2/flex/com/nxp/pcn/modules/avl/view/")
