@@ -17,6 +17,7 @@
 (setq auto-mode-alist (append '(("\\.as$" . as3-mode)) auto-mode-alist))
 (add-to-list 'load-path "d:/emacs")
 
+
 ;; loading nxhtml
 (load "D:/emacs/nxhtml/autostart.el")
 
@@ -58,7 +59,21 @@
 (require 'git-emacs)
 
 ;; flex compilation
-(require 'flex-ant)
+;;(require 'flex-ant)
+(add-to-list 'load-path "d:/emacs/flashdev.el")
+(require 'tq)
+;;(require 'flashdev-fcsh)
+(require 'flashdev)
+(setq flashdev-default-sdk "D:/flex/4.1.0")
+(global-set-key [f11] 'flashdev-fcsh-build)
+
+;; hober-html5
+(add-to-list 'load-path "D:/emacs/html5-el/")
+(eval-after-load "rng-loc"
+  '(add-to-list 'rng-schema-locating-files "D:/emacs/html5-el/schemas.xml"))
+
+(require 'whattf-dt)
+
 
 ;; MISC
 ;; rgrep from msys
@@ -68,13 +83,30 @@
    "D:\\distr\\msysgit\\msysgit\\bin;"
    (getenv "PATH")))
 
-;; show file name in window title
+;; breadcrumb
+(defun my-breadcrumb (path)
+  "Return path in a breadcrumb format."
+  (mapconcat 'identity
+             (split-string path (char-to-string directory-sep-char) t)
+             " > "))
+
 (setq frame-title-format
-      (list (format "%s %%S: %%j " (system-name))
-        '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
+      '(buffer-file-name
+        (:eval (my-breadcrumb buffer-file-name))
+        (dired-directory
+         (:eval (my-breadcrumb dired-directory))
+         ("%b"))))
+;; show file name in window title
+;;(setq frame-title-format
+  ;;    (list (format "%s %%S: %%j " (system-name))
+    ;;    '(buffer-file-name "%f" (dired-directory dired-directory "%b"))))
 
 ;; Prevent annoying bell
 (setq visible-bell t)
+
+;; iy-go-to-char
+(require 'iy-go-to-char)
+(global-set-key (kbd "M-m") 'iy-go-to-char)
 
 ;; F5 refreshes file
 (defun refresh-file ()
@@ -84,4 +116,6 @@
 
 (global-set-key [f5] 'refresh-file)
 
-(cd "d:/work/ePCN_2/flex/com/nxp/pcn/modules/avl/view/")
+
+;;(cd "d:/work/ePCN_2/flex/com/nxp/pcn/modules/avl/view/")
+
