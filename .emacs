@@ -1,3 +1,9 @@
+;; PATHS
+;; emacs library path
+(setq emacs-lib-path "d:/emacs")
+;; flex sdk path
+(setq flashdev-default-sdk "D:/flex/4.1.0")
+
 ;; ido 
 (require 'ido)
 (ido-mode t)
@@ -15,11 +21,11 @@
 (autoload 'actionscript-mode "actionscript-mode" "actionscript-mode" t)
 
 (setq auto-mode-alist (append '(("\\.as$" . as3-mode)) auto-mode-alist))
-(add-to-list 'load-path "d:/emacs")
+(add-to-list 'load-path emacs-lib-path)
 
 
 ;; loading nxhtml
-(load "D:/emacs/nxhtml/autostart.el")
+(load (concat emacs-lib-path "/nxhtml/autostart.el"))
 
 (defun mumamo-chunk-mxml-script (pos min max)
   "Find ... , return range and actionscript-mode."
@@ -50,27 +56,26 @@
 
 ;; yasnippets
 (require 'yasnippet)
-(setq yas/root-directory "d:/emacs/snippets")
+(setq yas/root-directory (concat emacs-lib-path "/snippets"))
 ; Load the snippets
 (yas/load-directory yas/root-directory)
 
 ;; git
-(add-to-list 'load-path "d:/emacs/git-emacs")
+(add-to-list 'load-path (concat emacs-lib-path "/git-emacs"))
 (require 'git-emacs)
 
 ;; flex compilation
 ;;(require 'flex-ant)
-(add-to-list 'load-path "d:/emacs/flashdev.el")
+(add-to-list 'load-path (concat emacs-lib-path "/flashdev.el"))
 (require 'tq)
 ;;(require 'flashdev-fcsh)
 (require 'flashdev)
-(setq flashdev-default-sdk "D:/flex/4.1.0")
 (global-set-key [f11] 'flashdev-fcsh-build)
 
 ;; hober-html5
-(add-to-list 'load-path "D:/emacs/html5-el/")
+(add-to-list 'load-path (concat emacs-lib-path "/html5-el/"))
 (eval-after-load "rng-loc"
-  '(add-to-list 'rng-schema-locating-files "D:/emacs/html5-el/schemas.xml"))
+  '(add-to-list 'rng-schema-locating-files (concat emacs-lib-path "/html5-el/schemas.xml")))
 
 (require 'whattf-dt)
 
